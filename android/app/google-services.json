@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "224841353755",
+    "project_id": "student-planner-95ed4",
+    "storage_bucket": "student-planner-95ed4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224841353755:android:b0fbb341433a2b5c9646be",
+        "android_client_info": {
+          "package_name": "com.yourday.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224841353755-fg22jam79m743umabgbgvc00uujbe7ol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeosMqVfmfYvtZuX0oFzoaZlptWGjPYDY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224841353755-fg22jam79m743umabgbgvc00uujbe7ol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="Plan smarter. Grow daily. Your personal companion for productivity and growth." />
+  <title>Your Day — Student Planner</title>
+
+  <!-- PWA Meta Tags -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- iOS Safari PWA Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Your Day" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/styles.css" />
+
+  <!-- Preconnect for speed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://www.gstatic.com" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- ── Splash caption + icon (runs immediately) ── -->
+  <script>
+    (function initSplash() {
+      const h = new Date().getHours();
+      const svgs = {
+        moon: `<svg class="splash-svg-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M38 14 C24 16 16 26 18 38 C20 50 32 56 44 52 C34 52 26 44 26 32 C26 20 34 14 38 14 Z" stroke="#aaaaaa" stroke-width="1.8" stroke-linejoin="round" fill="none"/></svg>`,
+        sunrise: `<svg class="splash-svg-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="44" x2="56" y2="44" stroke="#3a3a3a" stroke-width="1.5" stroke-linecap="round"/><path d="M18 44 A14 14 0 0 1 46 44" stroke="#cccccc" stroke-width="2" stroke-linecap="round" fill="none"/><line x1="32" y1="24" x2="32" y2="18" stroke="#999999" stroke-width="1.5" stroke-linecap="round"/><line x1="21" y1="28" x2="17" y2="24" stroke="#666666" stroke-width="1.5" stroke-linecap="round"/><line x1="43" y1="28" x2="47" y2="24" stroke="#666666" stroke-width="1.5" stroke-linecap="round"/><line x1="15" y1="37" x2="10" y2="36" stroke="#3a3a3a" stroke-width="1.5" stroke-linecap="round"/><line x1="49" y1="37" x2="54" y2="36" stroke="#3a3a3a" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+        sun: `<svg class="splash-svg-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="11" stroke="#cccccc" stroke-width="2" fill="none"/><line x1="32" y1="8" x2="32" y2="13" stroke="#888888" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="51" x2="32" y2="56" stroke="#888888" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="32" x2="13" y2="32" stroke="#888888" stroke-width="1.5" stroke-linecap="round"/><line x1="51" y1="32" x2="56" y2="32" stroke="#888888" stroke-width="1.5" stroke-linecap="round"/><line x1="15" y1="15" x2="19" y2="19" stroke="#555555" stroke-width="1.5" stroke-linecap="round"/><line x1="45" y1="45" x2="49" y2="49" stroke="#555555" stroke-width="1.5" stroke-linecap="round"/><line x1="49" y1="15" x2="45" y2="19" stroke="#555555" stroke-width="1.5" stroke-linecap="round"/><line x1="19" y1="45" x2="15" y2="49" stroke="#555555" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+        sunset: `<svg class="splash-svg-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="36" x2="56" y2="36" stroke="#3a3a3a" stroke-width="1.5" stroke-linecap="round"/><path d="M18 36 A14 14 0 0 0 46 36" stroke="#cccccc" stroke-width="2" stroke-linecap="round" fill="none"/><line x1="32" y1="52" x2="32" y2="46" stroke="#999999" stroke-width="1.5" stroke-linecap="round"/><line x1="21" y1="48" x2="17" y2="52" stroke="#666666" stroke-width="1.5" stroke-linecap="round"/><line x1="43" y1="48" x2="47" y2="52" stroke="#666666" stroke-width="1.5" stroke-linecap="round"/><line x1="15" y1="30" x2="10" y2="29" stroke="#3a3a3a" stroke-width="1.5" stroke-linecap="round"/><line x1="49" y1="30" x2="54" y2="29" stroke="#3a3a3a" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+      };
+      const iconKey = h < 5 || h >= 20 ? "moon" : h < 8 ? "sunrise" : h < 17 ? "sun" : "sunset";
+      const captions = h < 5 ? [ "Rest well. Tomorrow belongs to the prepared.", "The night is quiet. So is focus.", "Even in silence, growth continues." ] : h < 9 ? [ "Morning clarity is a superpower. Use it.", "The early hours don't lie. Make them count.", "Sunrise. A blank slate. Go.", "What you do before 9am shapes your day." ] : h < 12 ? [ "Your best thinking happens now. Protect it.", "Mid-morning momentum. Keep it going.", "Focused mornings build great outcomes." ] : h < 14 ? [ "Midday check-in: are you on track?", "Refuel. Refocus. Finish strong.", "Half the day remains. More than enough." ] : h < 17 ? [ "Afternoons are for execution. Ship something.", "The grind is just discipline in disguise.", "Progress over perfection — always." ] : h < 20 ? [ "Evenings are for reflection and preparation.", "What did you do today that future you will thank you for?", "Wind down, but don't coast." ] : [ "Late nights belong to the dedicated.", "While others sleep, the focused prepare.", "End the day intentionally. You earned it." ];
+      const caption = captions[Math.floor(Math.random() * captions.length)];
+      document.addEventListener("DOMContentLoaded", () => {
+        const iconEl = document.getElementById("splash-icon");
+        const capEl = document.getElementById("splash-caption");
+        if (iconEl) iconEl.innerHTML = svgs[iconKey];
+        if (capEl) capEl.textContent = caption;
+      });
+    })();
+  </script>
+</head>
+<body>
+
+<!-- ── SPLASH / LOADER ────────────────────────────────── -->
+<div id="app-splash">
+  <div class="splash-inner">
+    <div class="splash-logo-ring">
+      <div class="splash-ring"></div>
+      <div id="splash-icon"></div>
+    </div>
+    <div class="splash-title">Your Day</div>
+    <div class="splash-caption" id="splash-caption"></div>
+    <div class="splash-loading">
+      <span class="splash-dot"></span>
+      <span class="splash-dot"></span>
+      <span class="splash-dot"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!--  APP ROOT                                    -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="app-root">
+
+  <!-- ── LANDING PAGE ────────────────────────────── -->
+  <div id="page-landing" class="landing hidden">
+    <div class="landing-hero">
+      <h1 class="landing-title">Your Day</h1>
+      <p class="landing-subtitle">Plan smarter. Grow daily. Stay on top of everything that matters.</p>
+      <div class="landing-cta">
+        <button class="btn btn-primary btn-full ripple" id="btn-get-started">Get Started Free</button>
+        <button class="btn btn-secondary btn-full ripple" id="btn-landing-login">I already have an account</button>
+      </div>
+    </div>
+
+    <div class="features-grid" style="padding:0 var(--space-md) var(--space-md)">
+      <div class="feature-card">
+        <div class="feature-icon"><i data-lucide="sparkles"></i></div>
+        <div class="feature-title">AI Scheduler</div>
+        <div class="feature-desc">Auto-plan tasks into your free time slots</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i data-lucide="trending-up"></i></div>
+        <div class="feature-title">Personal Growth</div>
+        <div class="feature-desc">Track goals, habits & daily progress</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i data-lucide="book-open"></i></div>
+        <div class="feature-title">Subject Tracker</div>
+        <div class="feature-desc">Manage courses, topics & completion</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i data-lucide="bell"></i></div>
+        <div class="feature-title">Smart Reminders</div>
+        <div class="feature-desc">Push notifications for deadlines</div>
+      </div>
+    </div>
+
+    <div class="install-banner" style="margin:0 var(--space-md) var(--space-xl)">
+      <div class="install-banner-title">📲 Install on your iPhone</div>
+      <div class="install-step"><span>1.</span><span>Open in <strong>Safari</strong></span></div>
+      <div class="install-step"><span>2.</span><span>Tap the <strong>Share</strong> icon (↑)</span></div>
+      <div class="install-step"><span>3.</span><span>Tap <strong>"Add to Home Screen"</strong></span></div>
+      <div class="install-step"><span>4.</span><span>Tap <strong>Add</strong> — done! 🎉</span></div>
+    </div>
+  </div>
+
+  <!-- ── AUTH PAGE ──────────────────────────────── -->
+  <div id="page-auth" class="hidden">
+    <!-- Login -->
+    <div id="auth-login" class="auth-page">
+      <div class="auth-card">
+        <button class="auth-close auth-close-btn" aria-label="Close" title="Close"><i data-lucide="x" style="width:20px;height:20px"></i></button>
+        <h2 class="auth-title">Welcome back</h2>
+        <p class="auth-subtitle">Sign in to your Your Day account</p>
+        <form id="form-login" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email</label>
+            <input class="form-input" type="email" id="login-email" placeholder="you@example.com" autocomplete="email" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+            <input class="form-input" type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required />
+          </div>
+          <div id="login-error" class="form-error hidden"></div>
+          <button type="submit" class="btn btn-primary btn-full ripple" id="btn-login">Sign In</button>
+        </form>
+        <div class="auth-divider"><span>OR</span></div>
+        <button class="btn btn-google btn-full ripple" id="btn-google-login">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="btn-google-icon" alt="Google" />
+          Continue with Google
+        </button>
+        <div class="auth-switch">
+          <a href="#" id="link-forgot-pw">Forgot password?</a>
+        </div>
+        <div class="auth-switch" style="margin-top:8px">
+          Don't have an account? <a href="#" id="link-to-signup">Sign up</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signup -->
+    <div id="auth-signup" class="auth-page hidden">
+      <div class="auth-card">
+        <button class="auth-close auth-close-btn" aria-label="Close" title="Close"><i data-lucide="x" style="width:20px;height:20px"></i></button>
+        <div class="auth-logo"><i data-lucide="user-plus" style="width:40px;height:40px;color:var(--accent)"></i></div>
+        <h2 class="auth-title">Create account</h2>
+        <p class="auth-subtitle">Start your Your Day journey</p>
+        <form id="form-signup" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="signup-name">Display Name</label>
+            <input class="form-input" type="text" id="signup-name" placeholder="Your name" autocomplete="name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signup-email">Email</label>
+            <input class="form-input" type="email" id="signup-email" placeholder="you@example.com" autocomplete="email" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signup-password">Password</label>
+            <input class="form-input" type="password" id="signup-password" placeholder="At least 6 characters" autocomplete="new-password" required />
+          </div>
+          <div id="signup-error" class="form-error hidden"></div>
+          <button type="submit" class="btn btn-primary btn-full ripple" id="btn-signup">Create Account</button>
+        </form>
+        <div class="auth-divider"><span>OR</span></div>
+        <button class="btn btn-google btn-full ripple" id="btn-google-signup">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="btn-google-icon" alt="Google" />
+          Sign up with Google
+        </button>
+        <div class="auth-switch">
+          Already have an account? <a href="#" id="link-to-login">Sign in</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forgot Password -->
+    <div id="auth-forgot" class="auth-page hidden">
+      <div class="auth-card">
+        <button class="auth-close auth-close-btn" aria-label="Close" title="Close"><i data-lucide="x" style="width:20px;height:20px"></i></button>
+        <div class="auth-logo"><i data-lucide="key-round" style="width:40px;height:40px;color:var(--accent)"></i></div>
+        <h2 class="auth-title">Reset Password</h2>
+        <p class="auth-subtitle">We'll send a reset link to your email</p>
+        <form id="form-forgot" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="forgot-email">Email</label>
+            <input class="form-input" type="email" id="forgot-email" placeholder="you@example.com" autocomplete="email" required />
+          </div>
+          <div id="forgot-msg" class="form-error hidden"></div>
+          <button type="submit" class="btn btn-primary btn-full">Send Reset Link</button>
+        </form>
+        <div class="auth-switch" style="margin-top:12px">
+          <a href="#" id="link-back-to-login">← Back to login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MAIN APP ────────────────────────────────── -->
+  <div id="page-app" class="hidden">
+
+    <!-- Hamburger Menu Button -->
+    <button class="menu-toggle btn btn-icon ripple" id="btn-menu-toggle" aria-label="Open Menu">
+      <i data-lucide="menu"></i>
+    </button>
+
+    <!-- Page Content -->
+    <div class="app-container">
+      <div id="main-content" class="page-content"></div>
+    </div>
+
+    <!-- Side Drawer & Overlay -->
+    <div class="drawer-overlay hidden" id="drawer-overlay"></div>
+    <nav class="side-drawer" id="side-drawer">
+      <div class="drawer-header">
+        <div class="drawer-logo">Your Day</div>
+        <button class="drawer-close btn btn-ghost btn-sm" id="btn-close-drawer" aria-label="Close Menu"><i data-lucide="x"></i></button>
+      </div>
+      <div class="drawer-links">
+        <button class="drawer-item active ripple" data-page="dashboard">
+          <i data-lucide="layout-dashboard"></i> Dashboard
+        </button>
+        <button class="drawer-item ripple" data-page="schedule">
+          <i data-lucide="calendar"></i> Schedule
+        </button>
+        <button class="drawer-item ripple" data-page="subjects">
+          <i data-lucide="book"></i> Subjects
+        </button>
+        <button class="drawer-item ripple" data-page="tasks">
+          <i data-lucide="check-square"></i> Tasks
+        </button>
+        <button class="drawer-item ripple" data-page="scheduler">
+          <i data-lucide="sparkles"></i> AI Scheduler
+        </button>
+        <button class="drawer-item ripple" data-page="personalDevelopment">
+          <i data-lucide="trending-up"></i> Personal Dev
+        </button>
+        <button class="drawer-item ripple" data-page="analytics">
+          <i data-lucide="pie-chart"></i> Analytics
+        </button>
+        <button class="drawer-item ripple" data-page="settings">
+          <i data-lucide="settings"></i> Settings
+        </button>
+      </div>
+    </nav>
+
+    <!-- FAB (Quick Add Task) -->
+    <button class="fab ripple" id="fab-add-task" aria-label="Add Task" title="Add Task"><i data-lucide="plus"></i></button>
+
+    <!-- Install Prompt Banner -->
+    <div class="install-prompt hidden" id="install-prompt">
+      <span style="font-size:24px;color:var(--accent)"><i data-lucide="smartphone"></i></span>
+      <div class="install-prompt-text">
+        <div class="install-prompt-title">Add to Home Screen</div>
+        <div class="install-prompt-desc">Tap Share <i data-lucide="share" style="width:14px;height:14px;display:inline"></i> 
+          <i data-lucide="arrow-right" style="width:14px;height:14px;display:inline"></i> 
+          "Add to Home Screen" in Safari</div>
+      </div>
+      <button class="install-prompt-close" id="install-prompt-close"><i data-lucide="x" style="width:18px;height:18px"></i></button>
+    </div>
+
+  </div><!-- /#page-app -->
+
+</div><!-- /#app-root -->
+
+<!-- ── MODALS (rendered by JS) ─────────────────── -->
+<div id="modal-container"></div>
+
+<!-- ── SCRIPTS ─────────────────────────────────── -->
+
+<!-- Initialize Lucide Icons initially -->
+<script>
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
+</script>
+
+<!-- App Entry Point (ES module) -->
+<script type="module" src="/app.js"></script>
+
+<!-- Vite PWA Auto Reload -->
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      window.location.reload();
+    });
+  }
+</script>
+
+</body>
+</html>

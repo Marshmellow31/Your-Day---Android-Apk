@@ -1,0 +1,39 @@
+# Build artifacts
+bin/
+gen/
+out/
+build/
+.gradle/
+Captures/
+*.apk
+*.ap_
+*.dex
+*.class
+*.flat
+*.hprof
+
+# IDE files
+.idea/
+*.iml
+*.iws
+.vscode/
+
+# Node & Web
+node_modules/
+dist/
+.env
+.vercel/
+.firebase/
+*.log
+
+# Gradle
+.gradle/
+build/
+*/build/
+local.properties
+.navigation/
+
+# OS files
+.DS_Store
+Thumbs.db
+
